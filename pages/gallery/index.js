@@ -36,7 +36,7 @@ export default function Gallery({ images: defaultImages, nextCursor: defaultNext
   return (
     <div>
       <Headcomponent title="Geleria" />
-      <h4>Zdięcia samochodów/klientów</h4>
+      <h4>Galeria</h4>
       <div>
         {
           images.map(image => {
