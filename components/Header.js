@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
@@ -38,10 +37,6 @@ const Header = () => {
         <nav className={styles.nav}>
           <Link href="/">
             <a>Strona główna</a>
-          </Link>
-
-          <Link href="/price-list">
-            <a>Cennik usług</a>
           </Link>
 
           <Link href="/gallery">
