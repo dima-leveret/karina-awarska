@@ -1,5 +1,5 @@
 {
-  "name": "kuba-car-wash",
+  "name": "karina-awarska",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,7 +11,8 @@
   "dependencies": {
     "next": "12.1.5",
     "react": "18.0.0",
-    "react-dom": "18.0.0"
+    "react-dom": "18.0.0",
+    "react-router": "^6.3.0"
   },
   "devDependencies": {
     "eslint": "8.14.0",
