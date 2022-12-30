@@ -9,13 +9,11 @@ import {
   getFolders,
 } from "../../lib/cloudinary";
 
-export default function Gallery(
-  {
-    // images: defaultImages,
-    // nextCursor: defaultNextCursor,
-    folders,
-  }
-) {
+export default function Gallery({
+  // images: defaultImages,
+  // nextCursor: defaultNextCursor,
+  folders,
+}) {
   // const [images, setImages] = useState(defaultImages);
   // const [nextCursor, setNextCursor] = useState(defaultNextCursor);
 
@@ -129,7 +127,7 @@ export async function getStaticProps() {
   // const images = mapImageResources(resources);
 
   const { folders } = await getFolders();
-  console.log(folders);
+  // console.log(folders);
 
   return {
     props: {
