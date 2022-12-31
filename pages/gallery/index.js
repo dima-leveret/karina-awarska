@@ -116,7 +116,7 @@ export default function Gallery({
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   // const results = await searchAllImages({
   //   max_results: 15,
   //   expression: 'folder=""'

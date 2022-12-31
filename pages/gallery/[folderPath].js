@@ -19,30 +19,29 @@ const FolderPath = ({
   const [nextCursor, setNextCursor] = useState(defaultNextCursor);
 
   // const [activeFolder, setActiveFolder] = useState(folderPath);
-  
 
   // useEffect(() => {
 
-    // async function run() {
-    //   const results = await fetch("/api/searchAllImages", {
-    //     method: "POST",
-    //     body: JSON.stringify({
-    //       nextCursor,
-    //       max_results: 15,
-    //       expression: `folder=${activeFolder}`,
-    //     }),
-    //   }).then((r) => r.json());
+  // async function run() {
+  //   const results = await fetch("/api/searchAllImages", {
+  //     method: "POST",
+  //     body: JSON.stringify({
+  //       nextCursor,
+  //       max_results: 15,
+  //       expression: `folder=${activeFolder}`,
+  //     }),
+  //   }).then((r) => r.json());
 
-    //   const { resources, next_cursor: updatedNextCursor } = results;
+  //   const { resources, next_cursor: updatedNextCursor } = results;
 
-    //   const images = mapImageResources(resources);
+  //   const images = mapImageResources(resources);
 
-    //   setImages((prev) => {
-    //     return [...prev, ...images];
-    //   });
+  //   setImages((prev) => {
+  //     return [...prev, ...images];
+  //   });
 
-    //   setNextCursor(updatedNextCursor);
-    // }
+  //   setNextCursor(updatedNextCursor);
+  // }
 
   // }, []);
 
@@ -118,7 +117,21 @@ const FolderPath = ({
 
 export default FolderPath;
 
-export const getStaticPaths = async () => {
+// export const getStaticPaths = async () => {
+//   const { folders } = await getFolders();
+//   const paths = folders.map((folder) => {
+//     return {
+//       params: { folderPath: folder.path },
+//     };
+//   });
+
+//   return {
+//     paths: paths,
+//     fallback: "blocking",
+//   };
+// };
+
+export const getServerSideProps = async (context) => {
   const { folders } = await getFolders();
   const paths = folders.map((folder) => {
     return {
@@ -126,13 +139,6 @@ export const getStaticPaths = async () => {
     };
   });
 
-  return {
-    paths: paths,
-    fallback: "blocking",
-  };
-};
-
-export const getStaticProps = async (context) => {
   const folderPath = context.params.folderPath;
   const results = await searchAllImages({
     max_results: 15,
@@ -148,6 +154,9 @@ export const getStaticProps = async (context) => {
 
   return {
     props: {
+      paths: paths,
+      fallback: "blocking",
+
       images,
       nextCursor: nextCursor || null,
       folderPath,
