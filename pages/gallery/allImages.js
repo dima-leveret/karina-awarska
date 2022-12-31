@@ -6,19 +6,18 @@ import Link from "next/link";
 import {
   searchAllImages,
   mapImageResources,
-//   getFolders,
+  //   getFolders,
 } from "../../lib/cloudinary";
 
 export default function AllImages({
   images: defaultImages,
   nextCursor: defaultNextCursor,
-//   folders,
+  //   folders,
 }) {
   const [images, setImages] = useState(defaultImages);
   const [nextCursor, setNextCursor] = useState(defaultNextCursor);
 
-//   const [activeFolder, setActiveFolder] = useState("");
-
+  //   const [activeFolder, setActiveFolder] = useState("");
 
   // console.log("images => ", images);
   // console.log("nextCursor => ", nextCursor);
@@ -70,11 +69,11 @@ export default function AllImages({
     setNextCursor(updatedNextCursor);
   };
 
-//   const handleOnFolderClick = async (folderPath) => {
-//     setActiveFolder(folderPath);
-//     setImages([]);
-//     setNextCursor(undefined);
-//   };
+  //   const handleOnFolderClick = async (folderPath) => {
+  //     setActiveFolder(folderPath);
+  //     setImages([]);
+  //     setNextCursor(undefined);
+  //   };
 
   return (
     <div>
@@ -119,7 +118,7 @@ export default function AllImages({
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const results = await searchAllImages({
     max_results: 15,
     // expression: 'folder=""'
@@ -129,14 +128,14 @@ export async function getStaticProps() {
 
   const images = mapImageResources(resources);
 
-//   const { folders } = await getFolders();
-//   console.log(folders);
+  //   const { folders } = await getFolders();
+  //   console.log(folders);
 
   return {
     props: {
       images,
       nextCursor: nextCursor || null,
-    //   folders,
+      //   folders,
     },
   };
 }
