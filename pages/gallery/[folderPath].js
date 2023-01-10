@@ -51,7 +51,7 @@ const FolderPath = ({
       method: "POST",
       body: JSON.stringify({
         nextCursor,
-        max_results: 15,
+        max_results: 16,
         expression: `folder=${folderPath}`,
       }),
     }).then((r) => r.json());
@@ -141,7 +141,7 @@ export const getServerSideProps = async (context) => {
 
   const folderPath = context.params.folderPath;
   const results = await searchAllImages({
-    max_results: 15,
+    max_results: 16,
     expression: `folder=${folderPath}`,
   });
 
