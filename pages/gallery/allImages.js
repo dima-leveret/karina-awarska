@@ -2,8 +2,7 @@ import Headcomponent from "../../components/HeadComponent";
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Lightbox from "yet-another-react-lightbox";
-import "yet-another-react-lightbox/styles.css";
+import { ImagesLightbox } from "../../components/ImagesLightbox";
 
 import {
   searchAllImages,
@@ -80,7 +79,6 @@ export default function AllImages({
 
   const handleImageClick = (i) => {
     setIndex(i);
-    console.log(i);
   };
 
   return (
@@ -124,39 +122,10 @@ export default function AllImages({
         <span> To są wszystkie zdjęcia które obecnie mamy 😃</span>
       )}
 
-      <Lightbox
-        open={index >= 0}
+      <ImagesLightbox
         index={index}
-        close={() => setIndex(-1)}
         slides={images}
-        render={{
-          slide: (image, offset, rect) => {
-            const width = Math.round(
-              Math.min(rect.width, (rect.height / image.height) * image.width)
-            );
-            const height = Math.round(
-              Math.min(rect.height, (rect.width / image.width) * image.height)
-            );
-
-            return (
-              <div style={{ position: "relative", width, height }}>
-                <Image
-                  src={image.secure_url}
-                  layout="fill"
-                  loading="eager"
-                  placeholder="blurDataURL"
-                  objectFit="contain"
-                  alt={"alt" in image ? image.alt : ""}
-                  sizes={
-                    typeof window !== "undefined"
-                      ? `${Math.ceil((width / window.innerWidth) * 100)}vw`
-                      : `${width}px`
-                  }
-                />
-              </div>
-            );
-          },
-        }}
+        close={() => setIndex(-1)}
       />
     </div>
   );

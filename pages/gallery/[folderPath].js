@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { ImagesLightbox } from "../../components/ImagesLightbox";
 
 import { FolderImages } from "../../components/FolderImages";
 
@@ -17,6 +19,7 @@ const FolderPath = ({
 }) => {
   const [images, setImages] = useState(defaultImages);
   const [nextCursor, setNextCursor] = useState(defaultNextCursor);
+  const [index, setIndex] = useState(-1);
 
   // const [activeFolder, setActiveFolder] = useState(folderPath);
 
@@ -71,6 +74,10 @@ const FolderPath = ({
   //   setActiveFolder(folderPath);
   // };
 
+  const handleImageClick = (i) => {
+    setIndex(i);
+  };
+
   return (
     <div>
       <h4> {folderPath} </h4>
@@ -95,13 +102,14 @@ const FolderPath = ({
           nextCursor={defaultNextCursor}
           folderPath={folderPath}
         /> */}
-        {images?.map((image) => {
+        {images?.map((image, i) => {
           return (
-            <img
+            <Image
               width={300}
               height={300}
               key={image.asset_id}
               src={image.secure_url}
+              onClick={() => handleImageClick(i)}
             />
           );
         })}
@@ -111,6 +119,12 @@ const FolderPath = ({
       ) : (
         <span> To są wszystkie zdjęcia które obecnie mamy 😃</span>
       )}
+
+      <ImagesLightbox
+        index={index}
+        slides={images}
+        close={() => setIndex(-1)}
+      />
     </div>
   );
 };
