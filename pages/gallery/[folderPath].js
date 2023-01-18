@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ImagesLightbox } from "../../components/ImagesLightbox";
 
-import { FolderImages } from "../../components/FolderImages";
+// import { FolderImages } from "../../components/FolderImages";
 
 import {
   searchAllImages,
