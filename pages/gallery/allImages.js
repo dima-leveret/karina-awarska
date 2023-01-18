@@ -1,7 +1,8 @@
 import Headcomponent from "../../components/HeadComponent";
 import { useState } from "react";
-
 import Link from "next/link";
+import Image from "next/image";
+import { ImagesLightbox } from "../../components/ImagesLightbox";
 
 import {
   searchAllImages,
@@ -16,6 +17,7 @@ export default function AllImages({
 }) {
   const [images, setImages] = useState(defaultImages);
   const [nextCursor, setNextCursor] = useState(defaultNextCursor);
+  const [index, setIndex] = useState(-1);
 
   //   const [activeFolder, setActiveFolder] = useState("");
 
@@ -53,7 +55,7 @@ export default function AllImages({
       method: "POST",
       body: JSON.stringify({
         nextCursor,
-        max_results: 15,
+        max_results: 16,
         // expression: `folder=${activeFolder}`,
       }),
     }).then((r) => r.json());
@@ -74,6 +76,10 @@ export default function AllImages({
   //     setImages([]);
   //     setNextCursor(undefined);
   //   };
+
+  const handleImageClick = (i) => {
+    setIndex(i);
+  };
 
   return (
     <div>
@@ -98,13 +104,14 @@ export default function AllImages({
         ))} */}
       </div>
       <div>
-        {images.map((image) => {
+        {images.map((image, i) => {
           return (
-            <img
+            <Image
               width={300}
               height={300}
               key={image.asset_id}
               src={image.secure_url}
+              onClick={() => handleImageClick(i)}
             />
           );
         })}
@@ -114,13 +121,19 @@ export default function AllImages({
       ) : (
         <span> To są wszystkie zdjęcia które obecnie mamy 😃</span>
       )}
+
+      <ImagesLightbox
+        index={index}
+        slides={images}
+        close={() => setIndex(-1)}
+      />
     </div>
   );
 }
 
 export async function getServerSideProps() {
   const results = await searchAllImages({
-    max_results: 15,
+    max_results: 16,
     // expression: 'folder=""'
   });
 

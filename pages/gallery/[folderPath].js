@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { ImagesLightbox } from "../../components/ImagesLightbox";
 
 import { FolderImages } from "../../components/FolderImages";
 
@@ -17,6 +19,7 @@ const FolderPath = ({
 }) => {
   const [images, setImages] = useState(defaultImages);
   const [nextCursor, setNextCursor] = useState(defaultNextCursor);
+  const [index, setIndex] = useState(-1);
 
   // const [activeFolder, setActiveFolder] = useState(folderPath);
 
@@ -51,7 +54,7 @@ const FolderPath = ({
       method: "POST",
       body: JSON.stringify({
         nextCursor,
-        max_results: 15,
+        max_results: 16,
         expression: `folder=${folderPath}`,
       }),
     }).then((r) => r.json());
@@ -70,6 +73,10 @@ const FolderPath = ({
   // const handleOnFolderClick = (folderPath) => {
   //   setActiveFolder(folderPath);
   // };
+
+  const handleImageClick = (i) => {
+    setIndex(i);
+  };
 
   return (
     <div>
@@ -95,13 +102,14 @@ const FolderPath = ({
           nextCursor={defaultNextCursor}
           folderPath={folderPath}
         /> */}
-        {images?.map((image) => {
+        {images?.map((image, i) => {
           return (
-            <img
+            <Image
               width={300}
               height={300}
               key={image.asset_id}
               src={image.secure_url}
+              onClick={() => handleImageClick(i)}
             />
           );
         })}
@@ -111,6 +119,12 @@ const FolderPath = ({
       ) : (
         <span> To są wszystkie zdjęcia które obecnie mamy 😃</span>
       )}
+
+      <ImagesLightbox
+        index={index}
+        slides={images}
+        close={() => setIndex(-1)}
+      />
     </div>
   );
 };
@@ -141,7 +155,7 @@ export const getServerSideProps = async (context) => {
 
   const folderPath = context.params.folderPath;
   const results = await searchAllImages({
-    max_results: 15,
+    max_results: 16,
     expression: `folder=${folderPath}`,
   });
 
