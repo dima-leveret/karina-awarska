@@ -6,9 +6,9 @@
   width: 100%;
   background-color: white;
   border: 1px dashed;
-
   position: fixed;
-  content: "";
+  z-index: 1;
+  margin: -1px;
 }
 
 .logo {
@@ -166,9 +166,7 @@
     transform: rotate(45deg) translate(0px, 50%);
   }
 
-  .menuIconActive span{
+  .menuIconActive span {
     transform: scale(0) translate(0px, -50%);
   }
-
-
 }

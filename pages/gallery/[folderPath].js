@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ImagesLightbox } from "../../components/ImagesLightbox";
+import { PrimaryButtnom } from "../../components/PrimaryButton";
 
 // import { FolderImages } from "../../components/FolderImages";
 
@@ -54,7 +55,7 @@ const FolderPath = ({
       method: "POST",
       body: JSON.stringify({
         nextCursor,
-        max_results: 16,
+        max_results: 9,
         expression: `folder=${folderPath}`,
       }),
     }).then((r) => r.json());
@@ -82,9 +83,7 @@ const FolderPath = ({
     <div>
       <h4> {folderPath} </h4>
       <div>
-        <Link href="/gallery">
-          <button>Wróć</button>
-        </Link>
+        <Link href="/gallery">Wróć</Link>
         {/* {folders?.map((folder) => (
           <Link key={folder.path} href={`/gallery/${folder.path}`}>
             <button
@@ -115,7 +114,9 @@ const FolderPath = ({
         })}
       </div>
       {nextCursor ? (
-        <button onClick={handleLoadMoreImages}>Pokaż wicej zdjęć</button>
+        <PrimaryButtnom onClick={handleLoadMoreImages}>
+          Pokaż wicej
+        </PrimaryButtnom>
       ) : (
         <span> To są wszystkie zdjęcia które obecnie mamy 😃</span>
       )}
@@ -155,7 +156,7 @@ export const getServerSideProps = async (context) => {
 
   const folderPath = context.params.folderPath;
   const results = await searchAllImages({
-    max_results: 16,
+    max_results: 9,
     expression: `folder=${folderPath}`,
   });
 
