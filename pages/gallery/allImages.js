@@ -84,7 +84,7 @@ export default function AllImages({
   };
 
   return (
-    <div>
+    <div className={styles.pageContainer}>
       <Headcomponent title="Geleria" />
       <h4>Wszystkie zdjęcia</h4>
       <div>
@@ -108,8 +108,9 @@ export default function AllImages({
           return (
             <div className={styles.image} key={image.asset_id}>
               <Image
-                width={300}
-                height={300}
+                priority
+                layout="fill"
+                objectFit="contain"
                 src={image.secure_url}
                 onClick={() => handleImageClick(i)}
               />
