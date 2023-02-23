@@ -86,12 +86,12 @@ export default function AllImages({
   return (
     <div className={styles.pageContainer}>
       <Headcomponent title="Geleria" />
-      <h4>Wszystkie zdjęcia</h4>
       <div>
+        <Link href="/gallery">Wróć</Link>
+        <h4>Wszystkie zdjęcia</h4>
         {/* <Link href={`/gallery/allImages`}>
           <button>Wszystkie</button>
         </Link> */}
-        <Link href="/gallery">Wróć</Link>
         {/* {folders.map((folder) => (
           <Link key={folder.path} href={`/gallery/${folder.path}`}>
             <button
@@ -123,7 +123,7 @@ export default function AllImages({
           Pokaż wicej
         </PrimaryButtnom>
       ) : (
-        <span> To są wszystkie zdjęcia które obecnie mamy 😃</span>
+        <span> To są wszystkie zdjęcia które obecnie mam 😃</span>
       )}
 
       <ImagesLightbox
