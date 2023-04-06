@@ -3,6 +3,8 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ImagesLightbox } from "../../components/ImagesLightbox";
+import { PrimaryButtnom } from "../../components/PrimaryButton";
+import styles from "../../styles/Images.module.css";
 
 import {
   searchAllImages,
@@ -55,7 +57,7 @@ export default function AllImages({
       method: "POST",
       body: JSON.stringify({
         nextCursor,
-        max_results: 16,
+        max_results: 9,
         // expression: `folder=${activeFolder}`,
       }),
     }).then((r) => r.json());
@@ -82,16 +84,14 @@ export default function AllImages({
   };
 
   return (
-    <div>
+    <div className={styles.pageContainer}>
       <Headcomponent title="Geleria" />
-      <h4>Wszystkie zdjęcia</h4>
       <div>
+        <Link href="/gallery">Wróć</Link>
+        <h4>Wszystkie zdjęcia</h4>
         {/* <Link href={`/gallery/allImages`}>
           <button>Wszystkie</button>
         </Link> */}
-        <Link href="/gallery">
-          <button>Wróć</button>
-        </Link>
         {/* {folders.map((folder) => (
           <Link key={folder.path} href={`/gallery/${folder.path}`}>
             <button
@@ -103,23 +103,27 @@ export default function AllImages({
           </Link>
         ))} */}
       </div>
-      <div>
+      <div className={styles.imagesContainer}>
         {images.map((image, i) => {
           return (
-            <Image
-              width={300}
-              height={300}
-              key={image.asset_id}
-              src={image.secure_url}
-              onClick={() => handleImageClick(i)}
-            />
+            <div className={styles.image} key={image.asset_id}>
+              <Image
+                priority
+                layout="fill"
+                objectFit="cover"
+                src={image.secure_url}
+                onClick={() => handleImageClick(i)}
+              />
+            </div>
           );
         })}
       </div>
       {nextCursor ? (
-        <button onClick={handleLoadMoreImages}>Pokaż wicej zdjęć</button>
+        <PrimaryButtnom onClick={handleLoadMoreImages}>
+          Pokaż wicej
+        </PrimaryButtnom>
       ) : (
-        <span> To są wszystkie zdjęcia które obecnie mamy 😃</span>
+        <span> To są wszystkie zdjęcia które obecnie mam 😃</span>
       )}
 
       <ImagesLightbox
@@ -133,7 +137,7 @@ export default function AllImages({
 
 export async function getServerSideProps() {
   const results = await searchAllImages({
-    max_results: 16,
+    max_results: 9,
     // expression: 'folder=""'
   });
 
