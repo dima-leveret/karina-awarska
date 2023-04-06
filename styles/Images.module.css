@@ -16,10 +16,9 @@
 .image {
   position: relative;
   display: block;
-  width: 400px;
-  height: 400px;
+  width: 450px;
+  height: 450px;
   margin: 10px;
-  border: 1px solid black;
   transition: 0.3s;
 }
 

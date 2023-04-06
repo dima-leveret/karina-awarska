@@ -43,6 +43,10 @@ const Header = () => {
             <a>Geleria</a>
           </Link>
 
+          <Link href="/coaching">
+            <a>Coaching</a>
+          </Link>
+
           <Link href="/contact">
             <a>Kontakt</a>
           </Link>

@@ -110,7 +110,7 @@ export default function AllImages({
               <Image
                 priority
                 layout="fill"
-                objectFit="contain"
+                objectFit="cover"
                 src={image.secure_url}
                 onClick={() => handleImageClick(i)}
               />
