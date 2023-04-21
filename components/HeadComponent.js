@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-const Headcomponent = ({ title }) => {
+export const Headcomponent = ({ title }) => {
   return (
     <Head>
       <title>{title}</title>
@@ -8,4 +8,3 @@ const Headcomponent = ({ title }) => {
   );
 };
 
-export default Headcomponent;

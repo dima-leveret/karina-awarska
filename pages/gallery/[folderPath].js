@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Headcomponent } from "../../components/HeadComponent";
 import { ImagesLightbox } from "../../components/ImagesLightbox";
 import { PrimaryButtnom } from "../../components/PrimaryButton";
-
-// import { FolderImages } from "../../components/FolderImages";
+import styles from "../../styles/Images.module.css";
 
 import {
   searchAllImages,
@@ -16,38 +16,10 @@ const FolderPath = ({
   images: defaultImages,
   nextCursor: defaultNextCursor,
   folderPath,
-  // folders,
 }) => {
   const [images, setImages] = useState(defaultImages);
   const [nextCursor, setNextCursor] = useState(defaultNextCursor);
   const [index, setIndex] = useState(-1);
-
-  // const [activeFolder, setActiveFolder] = useState(folderPath);
-
-  // useEffect(() => {
-
-  // async function run() {
-  //   const results = await fetch("/api/searchAllImages", {
-  //     method: "POST",
-  //     body: JSON.stringify({
-  //       nextCursor,
-  //       max_results: 15,
-  //       expression: `folder=${activeFolder}`,
-  //     }),
-  //   }).then((r) => r.json());
-
-  //   const { resources, next_cursor: updatedNextCursor } = results;
-
-  //   const images = mapImageResources(resources);
-
-  //   setImages((prev) => {
-  //     return [...prev, ...images];
-  //   });
-
-  //   setNextCursor(updatedNextCursor);
-  // }
-
-  // }, []);
 
   const handleLoadMoreImages = async (e) => {
     e.preventDefault();
@@ -71,45 +43,29 @@ const FolderPath = ({
     setNextCursor(updatedNextCursor);
   };
 
-  // const handleOnFolderClick = (folderPath) => {
-  //   setActiveFolder(folderPath);
-  // };
-
   const handleImageClick = (i) => {
     setIndex(i);
   };
 
   return (
-    <div>
-      <h4> {folderPath} </h4>
+    <div className={styles.pageContainer}>
+      <Headcomponent title={`Galeria | ${folderPath}`} />
       <div>
         <Link href="/gallery">Wróć</Link>
-        {/* {folders?.map((folder) => (
-          <Link key={folder.path} href={`/gallery/${folder.path}`}>
-            <button
-              onClick={() => handleOnFolderClick(folder.path)}
-              key={folder.path}
-            >
-              {folder.name}
-            </button>
-          </Link>
-        ))} */}
+        <h4> {folderPath} </h4>
       </div>
-      <div>
-        {/* <FolderImages
-          images={defaultImages}
-          nextCursor={defaultNextCursor}
-          folderPath={folderPath}
-        /> */}
+      <div className={styles.imagesContainer}>
         {images?.map((image, i) => {
           return (
-            <Image
-              width={300}
-              height={300}
-              key={image.asset_id}
-              src={image.secure_url}
-              onClick={() => handleImageClick(i)}
-            />
+            <div className={styles.image} key={image.asset_id}>
+              <Image
+                priority
+                layout="fill"
+                objectFit="cover"
+                src={image.secure_url}
+                onClick={() => handleImageClick(i)}
+              />
+            </div>
           );
         })}
       </div>
@@ -132,20 +88,6 @@ const FolderPath = ({
 
 export default FolderPath;
 
-// export const getStaticPaths = async () => {
-//   const { folders } = await getFolders();
-//   const paths = folders.map((folder) => {
-//     return {
-//       params: { folderPath: folder.path },
-//     };
-//   });
-
-//   return {
-//     paths: paths,
-//     fallback: "blocking",
-//   };
-// };
-
 export const getServerSideProps = async (context) => {
   const { folders } = await getFolders();
   const paths = folders.map((folder) => {
@@ -165,8 +107,6 @@ export const getServerSideProps = async (context) => {
   const images = mapImageResources(resources);
   console.log(images);
 
-  // const { folders } = await getFolders();
-
   return {
     props: {
       paths: paths,
@@ -175,7 +115,6 @@ export const getServerSideProps = async (context) => {
       images,
       nextCursor: nextCursor || null,
       folderPath,
-      // folders,
     },
   };
 };
