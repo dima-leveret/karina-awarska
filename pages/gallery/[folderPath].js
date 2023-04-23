@@ -55,7 +55,7 @@ const FolderPath = ({
         <Link href="/gallery">Wróć</Link>
         <h4> {folderPath} </h4>
       </div> */}
-      <GalleryHeader children={folderPath} />
+      <GalleryHeader>{folderPath}</GalleryHeader>
       <div className={styles.imagesContainer}>
         {images?.map((image, i) => {
           return (
@@ -64,6 +64,7 @@ const FolderPath = ({
                 priority
                 layout="fill"
                 objectFit="cover"
+                alt="image"
                 src={image.secure_url}
                 onClick={() => handleImageClick(i)}
               />
@@ -107,7 +108,6 @@ export const getServerSideProps = async (context) => {
   const { resources, next_cursor: nextCursor } = results;
 
   const images = mapImageResources(resources);
-  console.log(images);
 
   return {
     props: {

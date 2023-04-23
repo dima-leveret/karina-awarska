@@ -48,7 +48,7 @@ export default function AllImages({
         <Link href="/gallery">Wróć</Link>
         <h4>Wszystkie zdjęcia</h4>
       </div> */}
-      <GalleryHeader children="Wszystkie" />
+      <GalleryHeader>Wszystkie</GalleryHeader>
       <div className={styles.imagesContainer}>
         {images.map((image, i) => {
           return (
@@ -57,6 +57,7 @@ export default function AllImages({
                 priority
                 layout="fill"
                 objectFit="cover"
+                alt="image"
                 src={image.secure_url}
                 onClick={() => handleImageClick(i)}
               />
