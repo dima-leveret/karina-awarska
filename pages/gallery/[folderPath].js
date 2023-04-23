@@ -5,6 +5,7 @@ import { Headcomponent } from "../../components/HeadComponent";
 import { ImagesLightbox } from "../../components/ImagesLightbox";
 import { PrimaryButtnom } from "../../components/PrimaryButton";
 import styles from "../../styles/Images.module.css";
+import { GalleryHeader } from "../../components/GalleryHeader";
 
 import {
   searchAllImages,
@@ -50,10 +51,11 @@ const FolderPath = ({
   return (
     <div className={styles.pageContainer}>
       <Headcomponent title={`Galeria | ${folderPath}`} />
-      <div>
+      {/* <div>
         <Link href="/gallery">Wróć</Link>
         <h4> {folderPath} </h4>
-      </div>
+      </div> */}
+      <GalleryHeader children={folderPath} />
       <div className={styles.imagesContainer}>
         {images?.map((image, i) => {
           return (

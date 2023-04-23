@@ -1,10 +1,17 @@
+:root {
+  --color-gray: #a49f9e;
+  --color-gray-transparent: #a49f9e4b;
+  --color-black: #151515;
+  --radius: 8px;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    height: 100%;
+  height: 100%;
 }
 
 body._lock {
@@ -13,15 +20,18 @@ body._lock {
 
 * {
   box-sizing: border-box;
+  color: #fff;
 }
-
 
 a {
   text-decoration: none;
-  color: black;
+  color: #fff;
 }
-
 
 #__next {
   min-height: 100%;
+}
+
+span {
+  color: #fff;
 }

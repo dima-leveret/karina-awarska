@@ -5,8 +5,8 @@ import Image from "next/image";
 import { ImagesLightbox } from "../../components/ImagesLightbox";
 import { PrimaryButtnom } from "../../components/PrimaryButton";
 import styles from "../../styles/Images.module.css";
-
 import { searchAllImages, mapImageResources } from "../../lib/cloudinary";
+import { GalleryHeader } from "../../components/GalleryHeader";
 
 export default function AllImages({
   images: defaultImages,
@@ -44,10 +44,11 @@ export default function AllImages({
   return (
     <div className={styles.pageContainer}>
       <Headcomponent title="Geleria | Wszystkie" />
-      <div>
+      {/* <div>
         <Link href="/gallery">Wróć</Link>
         <h4>Wszystkie zdjęcia</h4>
-      </div>
+      </div> */}
+      <GalleryHeader children="Wszystkie" />
       <div className={styles.imagesContainer}>
         {images.map((image, i) => {
           return (

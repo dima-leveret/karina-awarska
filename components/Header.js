@@ -26,7 +26,7 @@ const Header = () => {
     <header className={styles.header}>
       <Link href="/">
         <a className={styles.logo} onClick={closeNavBar}>
-          <h1>Karina Awarska</h1>
+          <h2>Karina Awarska</h2>
         </a>
       </Link>
 

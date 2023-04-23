@@ -1,24 +1,24 @@
 import { Headcomponent } from "../../components/HeadComponent";
 import Link from "next/link";
 import { getFolders } from "../../lib/cloudinary";
+import styles from "../../styles/Folders.module.css";
 
 export default function Gallery({ folders }) {
   return (
-    <div>
+    <>
       <Headcomponent title="Geleria" />
-      <h4>Galeria</h4>
       <h4>Foldery</h4>
-      <div>
+      <div className={styles.foldersContainer}>
         <Link href="/gallery/allImages">
-          <button>Wszystkie</button>
+          <span className={styles.folder}>Wszystkie</span>
         </Link>
         {folders.map((folder) => (
           <Link key={folder.path} href={`/gallery/${folder.path}`}>
-            <button key={folder.path}>{folder.name}</button>
+            <span className={styles.folder}>{folder.name}</span>
           </Link>
         ))}
       </div>
-    </div>
+    </>
   );
 }
 
